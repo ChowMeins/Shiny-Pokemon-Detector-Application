@@ -29,7 +29,7 @@
             </Style>
         </Grid.Resources>
 
-        <Border Background="#414141" CornerRadius="15" Margin="5"
+        <Border Background="#414141" CornerRadius="10" Margin="5"
             HorizontalAlignment="Stretch" VerticalAlignment="Center">
             <Label Content="Pokemon Shiny Hunting App" Foreground="White" Margin="5"
                    HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
@@ -44,7 +44,7 @@
             <Border Grid.Column="0" Background="#414141" CornerRadius="10" Margin="5">
                 <StackPanel Margin="5">
                     <Label Content="LIVE FEED"></Label>
-                    <Image Name="WebcamImage" Stretch="Uniform"/>
+                    <Image Name="WebcamImage" Source="{Binding CurrentFrame}"/>
                 </StackPanel>
             </Border>
             <!-- Right: Statistics / Previous Images -->

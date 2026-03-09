@@ -21,48 +21,23 @@ namespace ShinyHuntDesktopApp
     /// </summary>
     public partial class MainWindow : System.Windows.Window
     {
-        private VideoCapture capture;
-        private Mat frame;
-        private DispatcherTimer timer;
-        public MainWindow()
+        WebcamService webcamService;
+        MainViewModel mainViewModel;
+        public MainWindow() // Constructor
         {
             InitializeComponent();
+
+            mainViewModel = new MainViewModel();
+            DataContext = mainViewModel;
+
             // Initialize webcam
-            capture = new VideoCapture(0); // 0 = default camera
-            if (!capture.IsOpened())
-            {
-                MessageBox.Show("Could not open webcam!");
-                return;
-            }
-
-            frame = new Mat();
-
-            // Timer to update the Image control ~30 FPS
-            timer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromMilliseconds(33)
-            };
-            timer.Tick += Timer_Tick;
-            timer.Start();
+            webcamService = new WebcamService();
+            webcamService.Start();
+            webcamService.FrameReady += OnFrameReady; // Run OnFrameReady when invoked
         }
-
-        private void Timer_Tick(object sender, EventArgs e)
+        private void OnFrameReady(BitmapSource bitmap)
         {
-            capture.Read(frame);
-            if (!frame.Empty())
-            {
-                // Update Image control
-                WebcamImage.Source = frame.ToBitmapSource();
-            }
-        }
-
-        // Make sure to release resources when the window closes
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-            timer.Stop();
-            frame.Dispose();
-            capture.Release();
+            Dispatcher.Invoke(() => mainViewModel.CurrentFrame = bitmap);
         }
     }
 }
