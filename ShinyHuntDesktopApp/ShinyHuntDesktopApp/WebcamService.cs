@@ -11,7 +11,7 @@ public class WebcamService
 	private Thread thread;
 	private bool running;
 	private Mat currentFrame;
-    public event Action<BitmapSource> FrameReady; // Declaration
+    public event Action<BitmapSource>? FrameReady; // Declaration
     public WebcamService()
 	{
 		videoCapture = new VideoCapture(0);
@@ -37,7 +37,6 @@ public class WebcamService
 			{
                 BitmapSource bitmap = BitmapSourceConverter.ToBitmapSource(currentFrame);
                 bitmap.Freeze(); // Required to pass across threads
-				Console.WriteLine("Frame ready!");
                 FrameReady?.Invoke(bitmap); // Fire the event
             }
 		}
