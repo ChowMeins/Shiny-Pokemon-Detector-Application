@@ -11,8 +11,16 @@ public class AppDataService
     }
     public List<string> LoadPokemonNames()
     {
-        string path = Path.Combine(_basePath, "Data", "pokemon_names.json");
+        return LoadJson<List<string>>("pokemon_names.json");
+    }
+    public List<string> LoadMethodTypes()
+    {
+        return LoadJson<List<string>>("method_types.json");
+    }
+    private T LoadJson<T>(string filename) where T : new()
+    {
+        string path = Path.Combine(_basePath, "Data", filename);
         string json = File.ReadAllText(path);
-        return JsonSerializer.Deserialize<List<string>>(json) ?? new List<string>();
+        return JsonSerializer.Deserialize<T>(json) ?? new T();
     }
 }

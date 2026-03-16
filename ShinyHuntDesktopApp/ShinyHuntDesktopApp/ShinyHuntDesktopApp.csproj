@@ -20,6 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Data\method_types.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Data\pokemon_names.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

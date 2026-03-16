@@ -36,7 +36,7 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
@@ -50,11 +50,17 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Grid.Row="0" Content="TARGET POKEMON" Foreground="#7a82a0" Padding="10"/>
-                        <ComboBox Grid.Row="1" Template="{StaticResource ComboBoxStyle1}" ItemsSource="{Binding PokemonNames}" Foreground="#7a82a0" Padding="10" Margin="10,0,10,0" Background="#161b27" BorderBrush="#222840" BorderThickness="1"/>
+                        <ComboBox Grid.Row="1" Style="{StaticResource ComboBoxStyle1}" ItemsSource="{Binding PokemonNames}" Foreground="#7a82a0" Padding="10" Margin="10,0,10,0" Background="#161b27" BorderBrush="#222840" BorderThickness="1"/>
+                        <Label Grid.Row="2" Content="HUNT METHOD" Foreground="#7a82a0" Padding="10"/>
+                        <ComboBox Grid.Row="3" Style="{StaticResource ComboBoxStyle1}" ItemsSource="{Binding MethodTypes}" Foreground="#7a82a0" Padding="10" Margin="10,0,10,0" Background="#161b27" BorderBrush="#222840" BorderThickness="1"/>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                    </Grid>
+                    <Grid Grid.Row="3">
                     </Grid>
                 </Grid>
             </Border>

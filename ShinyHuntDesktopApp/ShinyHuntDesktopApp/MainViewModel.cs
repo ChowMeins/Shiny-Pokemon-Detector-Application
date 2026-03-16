@@ -17,12 +17,14 @@ public class MainViewModel : INotifyPropertyChanged
         }
     }
     public List<string> PokemonNames { get; set; }
+    public List<string> MethodTypes { get; set; }
 
     public MainViewModel()
     {
         PokemonNames = _dataService.LoadPokemonNames();
+        MethodTypes = _dataService.LoadMethodTypes();
     }
-    protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
