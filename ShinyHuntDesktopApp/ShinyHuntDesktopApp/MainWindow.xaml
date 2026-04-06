@@ -9,18 +9,26 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="#161b27" Padding="5" BorderBrush="#222840" BorderThickness="0,0,0,1" VerticalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0" Background="#161b27" CornerRadius="10" Margin="10" Padding="5" VerticalAlignment="Center">
-            <Label Content="SHINY TRACKER" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                <Image Grid.Column="0" Source="Data/pokeball.png" Height="30" Margin="5,0"/>
+                <Label Grid.Column="1" Content="SHINY TRACKER" FontFamily="Segoe UI" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
+            </Grid>
         </Border>
         <!-- Contains Webcam Feed and Statistics -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*" />
+                <ColumnDefinition Width="7*"/>
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
+
             <!-- Left: Webcam Feed -->
-            <Border Grid.Column="0" Background="#161b27" CornerRadius="10" Margin="10,10,5,10" BorderThickness="1,1,1,1" BorderBrush="#222840">
+            <Border Grid.Column="0" Background="#161b27" CornerRadius="10" Margin="10,10,10,10" BorderThickness="1,1,1,1" BorderBrush="#222840">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -30,8 +38,9 @@
                     <Image Grid.Row="1" Name="WebcamImage" Source="{Binding CurrentFrame}" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
             </Border>
+
             <!-- Right: Statistics / Previous Images -->
-            <Border Grid.Column="1" Background="#161b27" CornerRadius="10" Margin="5,10,10,10" BorderThickness="1,1,1,1" BorderBrush="#222840">
+            <ScrollViewer Grid.Column="1" Style="{StaticResource ScrollViewerStyle1}" VerticalScrollBarVisibility="Auto" BorderBrush="#222840" BorderThickness="1,0,0,0">
                 <!-- Put stats controls here -->
                 <Grid>
                     <Grid.RowDefinitions>
@@ -40,30 +49,89 @@
                         <RowDefinition Height="1*" />
                         <RowDefinition Height="1*" />
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="CURRENT HUNT" Padding="10" Foreground="#7a82a0" BorderThickness="0,0,0,1" BorderBrush="#222840" />
 
-                    <!-- Encounters -->
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Content="TARGET POKEMON" Foreground="#7a82a0" Padding="10"/>
-                        <ComboBox Grid.Row="1" Style="{StaticResource ComboBoxStyle1}" ItemsSource="{Binding PokemonNames}" Foreground="#7a82a0" Padding="10" Margin="10,0,10,0" Background="#161b27" BorderBrush="#222840" BorderThickness="1"/>
-                        <Label Grid.Row="2" Content="HUNT METHOD" Foreground="#7a82a0" Padding="10"/>
-                        <ComboBox Grid.Row="3" Style="{StaticResource ComboBoxStyle1}" ItemsSource="{Binding MethodTypes}" Foreground="#7a82a0" Padding="10" Margin="10,0,10,0" Background="#161b27" BorderBrush="#222840" BorderThickness="1"/>
-                    </Grid>
-                    <Grid Grid.Row="2">
-                    </Grid>
-                    <Grid Grid.Row="3">
-                    </Grid>
+                    <!-- Target/Hunt Selection -->
+                    <Border Grid.Row="0" Padding="0,0,0,10" Background="#161b27" CornerRadius="10" Margin="10,10,10,10" BorderThickness="1,1,1,1" BorderBrush="#222840">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="HUNT SETUP" Padding="10" Foreground="#7a82a0" BorderThickness="0,0,0,1" BorderBrush="#222840" />
+                            <Label Grid.Row="1" Content="Target Pokemon" FontSize="10" Foreground="#7a82a0" Padding="10"/>
+                            <ComboBox Grid.Row="2" Style="{StaticResource ComboBoxStyle1}" ItemsSource="{Binding PokemonNames}" Foreground="#7a82a0" Padding="10" Margin="10,0,10,0" Background="#161b27" BorderBrush="#222840" BorderThickness="1"/>
+                            <Label Grid.Row="3" Content="Hunt Method" FontSize="10" Foreground="#7a82a0" Padding="10"/>
+                            <ComboBox Grid.Row="4" Style="{StaticResource ComboBoxStyle1}" ItemsSource="{Binding MethodTypes}" Foreground="#7a82a0" Padding="10" Margin="10,0,10,0" Background="#161b27" BorderBrush="#222840" BorderThickness="1"/>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="1" Background="#161b27" CornerRadius="10" Margin="10,10,10,10" BorderThickness="1,1,1,1" BorderBrush="#222840">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.ColumnSpan="3" Content="ENCOUNTERS" Padding="10" Foreground="#7a82a0" BorderThickness="0,0,0,1" BorderBrush="#222840"/>
+                            <Label Grid.Row="1" Grid.ColumnSpan="3" Content="0" FontSize="24" Padding="10,5,0,5" Foreground="#7a82a0" />
+                            <Button Style="{DynamicResource ButtonStyle1}" Grid.Row="2" Grid.Column="0" Content="+" FontWeight="Bold" Margin="10">
+                                <Button.Resources>
+                                    <SolidColorBrush x:Key="Button.Static.Background"    Color="#56ba5e"/>
+                                    <SolidColorBrush x:Key="Button.Static.Border"         Color="#408545"/>
+                                    <SolidColorBrush x:Key="Button.Static.Foreground"     Color="#408545"/>
+                                    <SolidColorBrush x:Key="Button.MouseOver.Background"  Color="#6acc72"/>
+                                    <SolidColorBrush x:Key="Button.MouseOver.Border"      Color="#52a857"/>
+                                    <SolidColorBrush x:Key="Button.Pressed.Background"    Color="#429147"/>
+                                    <SolidColorBrush x:Key="Button.Pressed.Border"        Color="#2e6b32"/>
+                                    <SolidColorBrush x:Key="Button.Disabled.Background"   Color="#0a1510"/>
+                                    <SolidColorBrush x:Key="Button.Disabled.Border"       Color="#1a2a20"/>
+                                    <SolidColorBrush x:Key="Button.Disabled.Foreground"   Color="#1a4030"/>
+                                </Button.Resources>
+                            </Button>
+                            <TextBox Grid.Row="2" Grid.Column="1" Margin="10" TextChanged="TextBox_TextChanged" />
+                            <Button Style="{DynamicResource ButtonStyle1}" Grid.Row="2" Grid.Column="2" Content="-" FontWeight="Bold" Margin="10">
+                                <Button.Resources>
+                                    <SolidColorBrush x:Key="Button.Static.Background"   Color="#ba5656"/>
+                                    <SolidColorBrush x:Key="Button.Static.Border"        Color="#854040"/>
+                                    <SolidColorBrush x:Key="Button.Static.Foreground"    Color="#854040"/>
+                                    <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#cc6a6a"/>
+                                    <SolidColorBrush x:Key="Button.MouseOver.Border"     Color="#a85252"/>
+                                    <SolidColorBrush x:Key="Button.Pressed.Background"   Color="#914242"/>
+                                    <SolidColorBrush x:Key="Button.Pressed.Border"       Color="#6b2e2e"/>
+                                    <SolidColorBrush x:Key="Button.Disabled.Background"  Color="#150a0a"/>
+                                    <SolidColorBrush x:Key="Button.Disabled.Border"      Color="#2a1a1a"/>
+                                    <SolidColorBrush x:Key="Button.Disabled.Foreground"  Color="#301a1a"/>
+                                </Button.Resources>
+                            </Button>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Row="2" Padding="0,0,0,10" Background="#161b27" CornerRadius="10" Margin="10,10,10,10" BorderThickness="1,1,1,1" BorderBrush="#222840">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="ARDUINO CONNECTION" Padding="10" Foreground="#7a82a0" BorderThickness="0,0,0,1" BorderBrush="#222840"/>
+                            <Label Grid.Row="1" Content="COM Port" FontSize="10" Padding="10" Foreground="#7a82a0"/>
+                            <ComboBox Grid.Row="2" Style="{StaticResource ComboBoxStyle1}" ItemsSource="{Binding ComPorts}" Foreground="#7a82a0" Margin="10,0,10,0" Padding="10" />
+                        </Grid>
+                    </Border>
                 </Grid>
-            </Border>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>

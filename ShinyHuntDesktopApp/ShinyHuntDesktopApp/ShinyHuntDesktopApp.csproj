@@ -16,7 +16,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Data\pokeball.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="OpenCvSharp4.Windows" Version="4.13.0.20260302" />
+    <PackageReference Include="System.IO.Ports" Version="10.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Data\pokeball.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
